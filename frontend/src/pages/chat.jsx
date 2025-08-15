@@ -8,7 +8,10 @@ import { HiMenu } from "react-icons/hi";
 import axios from "axios";
 import Addfriend from "../component/Addfriend";
 
-const socket = io("https://chatapp-3-716o.onrender.com");
+const socket = io(import.meta.env.VITE_BACKEND_URL, {
+  transports: ["websocket", "polling"],
+  withCredentials: true,
+});
 
 const Chat = () => {
   const navigate = useNavigate();

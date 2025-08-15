@@ -13,7 +13,11 @@ const { send } = require("process");
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://chat-app-jiyl.vercel.app",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(express.json());
 
 mongoose
@@ -32,7 +36,7 @@ const server = http.createServer(app);
 const PORT = 5000;
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-jiyl.vercel.app/",
+    origin: "https://chat-app-jiyl.vercel.app",
     methods: ["GET", "POST"],
   },
 });

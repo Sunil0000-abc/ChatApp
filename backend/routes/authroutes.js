@@ -7,8 +7,18 @@ const bcrypt = require('bcryptjs');
 const message = require("../model/message");
 const nodemailer  = require('nodemailer');
 const dotenv = require("dotenv");
+const cors = require('cors');
 
 dotenv.config();
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",           
+    "https://chat-app-jiyl.vercel.app" 
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 
 const transporter  = nodemailer.createTransport({
   service:"gmail",
@@ -161,7 +171,7 @@ router.post("/add-friend", async (req, res) => {
 });
 
 
-// routes/friend.js
+
 router.delete("/remove-friend", async (req, res) => {
   const { currentUserId, friendUserId } = req.body;
 
@@ -191,19 +201,19 @@ router.post("/save-message", async (req, res) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Find conversation between these two users
+   
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
 
     if (!conversation) {
-      // Create new conversation if not exists
+     
       conversation = new Conversation({
         participants: [senderId, receiverId],
         messages: [{ sender: senderId, content: message }],
       });
     } else {
-      // Push new message
+      
       conversation.messages.push({ sender: senderId, content: message });
     }
 
