@@ -32,7 +32,7 @@ const server = http.createServer(app);
 const PORT = 5000;
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-fde1.vercel.app/",
+    origin: "https://chat-app-jiyl.vercel.app/",
     methods: ["GET", "POST"],
   },
 });
