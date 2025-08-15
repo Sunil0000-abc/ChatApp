@@ -15,19 +15,19 @@ const Auth = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const baseUrl = "https://chatapp-3-716o.onrender.com";
   const handleSubmit = async (e) => {
     e.preventDefault();
     let endpoint = '';
 
     if (mode === "login") {
-      endpoint = 'http://localhost:5000/api/auth/login';
+      endpoint = `${baseUrl}/api/auth/login`;
     } else if (mode === "signup") {
-      endpoint = 'http://localhost:5000/api/auth/signup';
+      endpoint = `${baseUrl}/api/auth/signup`;
     } else if (mode === "forgot") {
-      endpoint = 'http://localhost:5000/api/auth/forgot-password';
+      endpoint = `${baseUrl}/api/auth/forgot-password`;
     } else if (mode === "reset") {
-      endpoint = 'http://localhost:5000/api/auth/reset-password';
+      endpoint = `${baseUrl}/api/auth/reset-password`;
     }
 
     try {

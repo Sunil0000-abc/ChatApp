@@ -8,7 +8,7 @@ const Addfriend = ({ className, currentUserId }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/auth/all-user');
+        const res = await axios.get('https://chatapp-3-716o.onrender.com/api/auth/all-user');
         setUsers(res.data);
       } catch (err) {
         console.error(err);
@@ -20,7 +20,7 @@ const Addfriend = ({ className, currentUserId }) => {
 
   const handleAddFriend = async (friendUserId) => {
     try {
-      await axios.post('http://localhost:5000/api/auth/add-friend', {
+      await axios.post('https://chatapp-3-716o.onrender.com/api/auth/add-friend', {
         currentUserId,
         friendUserId
       });
@@ -32,12 +32,12 @@ const Addfriend = ({ className, currentUserId }) => {
 
   return (
     <div className={`text-white ${className}`}>
-      {/* Header */}
+      
       <div className="flex items-center justify-center mb-4">
         <h1 className="text-xl font-semibold">Add Friend</h1>
       </div>
 
-      {/* Friends List */}
+      
       <div className="space-y-3 max-h-[300px] overflow-y-auto">
         {users.map((itm) => (
           <div

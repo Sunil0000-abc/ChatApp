@@ -8,7 +8,7 @@ import { HiMenu } from "react-icons/hi";
 import axios from "axios";
 import Addfriend from "../component/Addfriend";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://chatapp-3-716o.onrender.com");
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Chat = () => {
     const fetchFriends = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/auth/get-friend/${currentUser.id}`
+          `https://chatapp-3-716o.onrender.com/api/auth/get-friend/${currentUser.id}`
         );
         setFriends(res.data);
       } catch (err) {
@@ -62,7 +62,7 @@ const Chat = () => {
         message,
       });
 
-      await axios.post("http://localhost:5000/api/auth/save-message", {
+      await axios.post("https://chatapp-3-716o.onrender.com/api/auth/save-message", {
         senderId: currentUser.id,
         receiverId: selectedUser._id,
         message: message,
@@ -85,7 +85,7 @@ const Chat = () => {
     setFriends((prev) => prev.filter((f) => f._id !== friendId));
 
     try {
-      await axios.delete(`http://localhost:5000/api/auth/remove-friend`, {
+      await axios.delete(`https://chatapp-3-716o.onrender.com/api/auth/remove-friend`, {
         data: { currentUserId: currentUser.id, friendUserId: friendId },
       });
     } catch (err) {
@@ -133,7 +133,7 @@ const Chat = () => {
       />
     </div>
 
-    {/* User Menu */}
+    
     {userMenu && (
       <div className="bg-[#253040] rounded shadow-md p-2 mb-4">
         <div className="flex items-center gap-2 p-2 hover:bg-[#2E3C4D] cursor-pointer">
@@ -150,7 +150,7 @@ const Chat = () => {
       </div>
     )}
 
-    {/* Friends List */}
+    
     <div className="flex-1 overflow-y-auto">
       {friends.length > 0 ? (
         friends.map((itm) => {
@@ -160,7 +160,7 @@ const Chat = () => {
               key={itm._id}
               onClick={() => {
                 setSelectedUser(itm);
-                setSidebarOpen(false); // close sidebar on mobile
+                setSidebarOpen(false); 
               }}
               className={`p-2 rounded-lg cursor-pointer flex justify-between items-center ${
                 isSelected
@@ -187,16 +187,16 @@ const Chat = () => {
     </div>
   </div>
 
-  {/* CHAT AREA */}
+  
   <div className="flex-1 flex flex-col">
-    {/* Chat Header for Desktop */}
+    
     <div className="hidden md:flex bg-[#1A2332] p-4 shadow items-center h-16">
       <h2 className="text-lg font-semibold">
         {selectedUser ? selectedUser.name : "Select a user to chat"}
       </h2>
     </div>
 
-    {/* Messages */}
+    
     <div className="flex-1 p-4 overflow-y-auto space-y-2">
       {selectedUser &&
       chatMessages[selectedUser._id] &&
@@ -222,7 +222,7 @@ const Chat = () => {
       )}
     </div>
 
-    {/* Input */}
+    
     {selectedUser && (
       <div className="p-3 bg-[#1A2332] flex items-center gap-2">
         <input
@@ -243,7 +243,7 @@ const Chat = () => {
     )}
   </div>
 
-  {/* Add Friend Modal */}
+ 
   {addfriend && (
   <div
     className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
